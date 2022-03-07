@@ -1,3 +1,11 @@
+Merchant.destroy_all
+    Customer.destroy_all
+    BulkDiscount.destroy_all
+    Invoice.destroy_all
+    Item.destroy_all
+    Transaction.destroy_all
+    InvoiceItem.destroy_all
+
 merchant_1 = Merchant.create!(name: 'Bob Belcher')
 merchant_2 = Merchant.create!(name: 'Tina Belcher')
 
