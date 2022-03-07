@@ -37,7 +37,7 @@ RSpec.describe 'Bulk Discounts Index' do
     visit merchant_bulk_discounts_path(merchant_1.id)
   end
 
-  it 'merchant sees all bulk discounts with their percentage discount and quantity threshold' do
+  it 'shows all bulk discounts with their percentage discount and quantity threshold' do
     expect(page).to have_content(discount_1.percentage_discount)
     expect(page).to have_content(discount_1.quantity_threshold)
 
@@ -48,14 +48,14 @@ RSpec.describe 'Bulk Discounts Index' do
     expect(page).to have_content(discount_3.quantity_threshold)
   end
 
-  it 'merchant sees all bulk discounts as links to its show page' do
+  it 'shows all bulk discounts as links to its show page' do
     expect(page).to have_link("Link to Discount ##{discount_1.id}")
     expect(page).to have_link("Link to Discount ##{discount_2.id}")
     expect(page).to have_link("Link to Discount ##{discount_3.id}")
     expect(page).to_not have_link("Link to Discount ##{discount_4.id}")
   end
 
-  it 'merchant sees link to create a new discount' do
+  it 'has link to create a new discount' do
     click_link("Create New Discount")
     expect(current_path).to eq(new_merchant_bulk_discount_path(merchant_1.id))
 
@@ -66,5 +66,13 @@ RSpec.describe 'Bulk Discounts Index' do
     expect(current_path).to eq(merchant_bulk_discounts_path(merchant_1.id))
     expect(page).to have_content(30)
     expect(page).to have_content(20)
+  end
+
+  it 'has link to delete each discount' do
+    expect(page).to have_content(discount_1.percentage_discount)
+    click_link("Delete ##{discount_1.id}")
+
+    expect(current_path).to eq(merchant_bulk_discounts_path(merchant_1.id))
+    expect(page).to_not have_content(discount_1.percentage_discount)
   end
 end
