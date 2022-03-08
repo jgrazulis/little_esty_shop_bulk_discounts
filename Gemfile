@@ -41,6 +41,7 @@ gem 'bootstrap'
 gem 'tether-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'httparty'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -53,6 +54,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.1'
   gem 'shoulda-matchers'
   gem 'simplecov'
+end
+
+group :test do
+  gem 'webmock'
 end
 
 group :development do
