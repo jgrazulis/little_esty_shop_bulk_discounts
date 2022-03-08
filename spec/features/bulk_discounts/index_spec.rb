@@ -4,7 +4,7 @@ RSpec.describe 'Bulk Discounts Index' do
   let!(:merchant_1) {Merchant.create!(name: 'Bob Belcher')}
   let!(:merchant_2) {Merchant.create!(name: 'Tina Belcher')}
 
-  let!(:discount_1) {merchant_1.bulk_discounts.create!(percentage_discount: 20, quantity_threshold: 10)}
+  let!(:discount_1) {merchant_1.bulk_discounts.create!(percentage_discount: 40, quantity_threshold: 100)}
   let!(:discount_2) {merchant_1.bulk_discounts.create!(percentage_discount: 30, quantity_threshold: 15)}
   let!(:discount_3) {merchant_1.bulk_discounts.create!(percentage_discount: 15, quantity_threshold: 15)}
   let!(:discount_4) {merchant_2.bulk_discounts.create!(percentage_discount: 15, quantity_threshold: 21)}
