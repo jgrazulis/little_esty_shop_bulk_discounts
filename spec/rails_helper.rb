@@ -34,13 +34,13 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.before :each do
-    mock_holidays = [{}, {}, {}]
+  config.before(:each) do
+    json_response = File.read('spec/fixtures/next_holidays.json')
+    stub_request(:get, "https://date.nager.at/api/v2/NextPublicHolidays/US").
+    to_return(status: 200, body: json_response)
+  end
 
-    allow_any_instance_of(HolidayDiscount).to receive(:upcoming_us_holidays).and_return(mock_holidays)
-  end 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
