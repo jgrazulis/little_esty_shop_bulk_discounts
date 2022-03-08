@@ -5,6 +5,8 @@ RSpec.describe 'invoices show' do
     @merchant1 = Merchant.create!(name: 'Hair Care')
     @merchant2 = Merchant.create!(name: 'Jewelry')
 
+    @discount1 = @merchant1.bulk_discounts.create!(percentage_discount: 15, quantity_threshold: 10)
+
     @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id, status: 1)
     @item_2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: @merchant1.id)
     @item_3 = Item.create!(name: "Brush", description: "This takes out tangles", unit_price: 5, merchant_id: @merchant1.id)
@@ -98,6 +100,19 @@ RSpec.describe 'invoices show' do
      within("#current-invoice-status") do
        expect(page).to_not have_content("in progress")
      end
-  end
+    end
+  
+  #   it 'shows link to show page for bulk discount that was applied next to each invoice item (if any)' do
+  #    visit merchant_invoice_path(@merchant1, @invoice_1)
+  #     # save_and_open_page
+  #     within "#invoice_item-#{@ii_11.id}" do
+  #       expect(page).to have_link("Applied Discount", href: merchant_bulk_discount_path(@merchant1.id, @discount1.id))
+  #     end
 
+  #     within "#invoice_item-#{@ii_11.id}" do
+  #       click_link "Applied Discount"
+  #   end
+
+  #     expect(current_path).to eq(merchant_bulk_discount_path(@merchant1.id, @discount1.id))
+  # end
 end
